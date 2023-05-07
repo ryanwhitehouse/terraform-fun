@@ -24,10 +24,9 @@ jobs:
           name: "Run build"
           command: "npm run build"
       - aws-ecr/build-and-push-image:
-        aws-access-key-id: $AWS_ID
-        aws-secret-access-key: $AWS_Secret
-        region: $AWS_Region
-        registry-id: 451213086978.dkr.ecr.eu-central-1.amazonaws.com
+        aws-access-key-id: AWS_ID
+        aws-secret-access-key: AWS_Secret
+        registry-id: 451213086978
         name: "Build and push Docker image to ECR"
         path: .
         tag: latest
