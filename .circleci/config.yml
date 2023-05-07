@@ -29,6 +29,4 @@ jobs:
 workflows:
   build_and_test:
     jobs:
-      - test_and_deploy:
-        context:
-          - AWS
+      - test_and_deploy
