@@ -29,4 +29,6 @@ jobs:
 workflows:
   build_and_test:
     jobs:
-      - test_and_deploy
+      - test_and_deploy:
+        context:
+          - test-context
