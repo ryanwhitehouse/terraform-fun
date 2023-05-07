@@ -27,9 +27,6 @@ jobs:
         aws-access-key-id: AWS_ID
         aws-secret-access-key: AWS_Secret
         registry-id: 451213086978
-        name: "Build and push Docker image to ECR"
-        path: .
-        tag: latest
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
