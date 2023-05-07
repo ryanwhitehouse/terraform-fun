@@ -32,7 +32,7 @@ workflows:
       - test_and_deploy:
           context:
             - AWS
-       - aws-ecr/build-and-push-image:
+      - aws-ecr/build-and-push-image:
         aws-access-key-id: $AWS_ID
         aws-secret-access-key: $AWS_Secret
         registry-id: 451213086978
