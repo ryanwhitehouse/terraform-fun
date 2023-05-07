@@ -23,6 +23,15 @@ jobs:
       - run:
           name: "Run build"
           command: "npm run build"
+  publish-docker:
+    docker:
+      - image: circleci/node:latest
+    steps:
+      - aws-ecr/build-and-push-image:
+          aws-access-key-id: AWS_ID 
+          aws-secret-access-key: AWS_Secret 
+          repo: hello 
+          registry-id: REG_ID
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
@@ -32,7 +41,6 @@ workflows:
       - test_and_deploy:
           context:
             - AWS
-      - aws-ecr/build-and-push-image:
-        aws-access-key-id: AWS_ID
-        aws-secret-access-key: AWS_Secret
-        registry-id: 451213086978
+      - publish-docker:
+          context:
+            - AWS
