@@ -30,5 +30,5 @@ workflows:
   build_and_test:
     jobs:
       - test_and_deploy:
-        context:
-          - test-context
+          context:
+            - test-context
