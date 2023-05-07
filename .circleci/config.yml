@@ -2,6 +2,9 @@
 # See: https://circleci.com/docs/configuration-reference
 version: 2.1
 
+orbs:
+  aws-ecr: circleci/aws-ecr@8.2.1
+
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
@@ -20,10 +23,25 @@ jobs:
       - run:
           name: "Run build"
           command: "npm run build"
+      - aws-ecr/build-and-push-image:
+          aws-access-key-id: $AWS_ID
+          aws-cli-version: latest
+          aws-secret-access-key: $AWS_Secret
+          dockerfile: Dockerfile
+          executor: aws-ecr/default
+          platform: linux/amd64
+          public-registry: false
+          push-image: true
+          region: $AWS_Region
+          registry-id: 451213086978.dkr.ecr.eu-central-1.amazonaws.com
+          repo: hello
+          tag: latest,testTag
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
 workflows:
   build_and_test:
     jobs:
-      - test_and_deploy
+      - test_and_deploy:
+        context:
+          - AWS
